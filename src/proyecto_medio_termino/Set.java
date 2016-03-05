@@ -4,14 +4,11 @@
 package proyecto_medio_termino;
 
 public class Set {
-    Game mSetGames[];
+
+    private Game mSetGames[];
 
     public Set(Game[] setGames){
-
-        this.mSetGames = setGames;
-
+        mSetGames = setGames;
     }
-
-
 
 }

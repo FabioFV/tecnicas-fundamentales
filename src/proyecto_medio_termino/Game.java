@@ -4,11 +4,9 @@
 package proyecto_medio_termino;
 
 public class Game {
-    Point mGamePoints[];
+    private Point mGamePoints[];
 
     public Game(Point[] gamepoints){
-
-        this.mGamePoints = gamepoints;
-
+        mGamePoints = gamepoints;
     }
 }

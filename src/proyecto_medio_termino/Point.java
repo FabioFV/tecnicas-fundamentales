@@ -4,14 +4,13 @@
 package proyecto_medio_termino;
 
 public class Point {
-    Player mScoringPlayer;
-    Shots mShot;
+
+    private Player mScoringPlayer;
+    private Shots mShot;
 
     public Point(Player scoringPlayer, Shots shot){
-
-        this.mScoringPlayer = scoringPlayer;
-        this.mShot = shot;
-
+        mScoringPlayer = scoringPlayer;
+        mShot = shot;
     }
 
 }
