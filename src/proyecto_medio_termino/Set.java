@@ -23,7 +23,7 @@ public class Set {
         mServerPlayer = serverPlayer;
         mTiebreakGame = tiebreakGame;
 
-        mGames.add(new Game(mFirstPlayer, mSecondPlayer, mServerPlayer));
+        mGames.add(new Game(mFirstPlayer, mSecondPlayer, mServerPlayer, false));
         mPlayersWins.put(mFirstPlayer, 0);
         mPlayersWins.put(mSecondPlayer, 0);
     }
@@ -35,8 +35,24 @@ public class Set {
         if(g.addPoint(p))
         {
             Player winner = g.getWinner();
+            Player loser = g.getLoser();
+
+            if(g.isTieBreak == true){
+                mPlayersWins.replace(winner, mPlayersWins.get(winner) + 1);
+                return true;
+            }
+
             mPlayersWins.replace(winner, mPlayersWins.get(winner) + 1);
             //// TODO: LOGIC FOR CHECK IF THE SET IS OVER
+            int gamePointsWinner = mPlayersWins.get(winner);
+            int gamePointsLoser = mPlayersWins.get(loser);
+
+            if(gamePointsWinner == 6 && gamePointsLoser == 6){
+                mGames.add(new Game ( mFirstPlayer, mSecondPlayer, mServerPlayer, true));
+            }
+            else if( gamePointsWinner >= 6 && ( gamePointsWinner - gamePointsLoser ) >= 2 ){
+                return true;
+            }
             //// IF IS OVER RETURN TRUE
         }
         return false;
