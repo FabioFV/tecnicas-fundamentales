@@ -24,7 +24,7 @@ public class Match {
         mNumSetsToWin = numSetsToWin;
         mTiebreakGame = tiebreakGame;
 
-        mSets.add(new Set(mFirstPlayer, mSecondPlayer, mServerPlayer));
+        mSets.add(new Set(mFirstPlayer, mSecondPlayer, mServerPlayer, mTiebreakGame));
         mPlayersWins.put(mFirstPlayer, 0);
         mPlayersWins.put(mSecondPlayer, 0);
     }
@@ -43,7 +43,7 @@ public class Match {
                 return true;
             }
             else
-                mSets.add(new Set(mFirstPlayer, mSecondPlayer, mServerPlayer));
+                mSets.add(new Set(mFirstPlayer, mSecondPlayer, mServerPlayer, mTiebreakGame));
         }
         return false;
     }
