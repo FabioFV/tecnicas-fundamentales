@@ -13,4 +13,7 @@ public class Point {
         mShot = shot;
     }
 
+    public Player getScoringPlayer() {
+        return mScoringPlayer;
+    }
 }

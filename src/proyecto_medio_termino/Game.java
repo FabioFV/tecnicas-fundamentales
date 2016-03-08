@@ -3,10 +3,38 @@
  */
 package proyecto_medio_termino;
 
-public class Game {
-    private Point mGamePoints[];
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
 
-    public Game(Point[] gamepoints){
-        mGamePoints = gamepoints;
+public class Game {
+
+    private Queue<Point> mPoints = new LinkedList<>();
+    private Map<Player, Integer> mPlayersWins = new HashMap<>();
+
+    private Player mFirstPlayer, mSecondPlayer, mServerPlayer;
+    private Player mWinner = null;
+
+    public Game(Player firstPlayer, Player secondPlayer, Player serverPlayer)
+    {
+        mFirstPlayer = firstPlayer;
+        mSecondPlayer = secondPlayer;
+        mServerPlayer = serverPlayer;
+    }
+
+
+    public boolean addPoint(Point p)
+    {
+        mPoints.add(p);
+        mPlayersWins.replace(p.getScoringPlayer(), mPlayersWins.get(p.getScoringPlayer()) + 1);
+        //// TODO: LOGIC FOR CHECK IF THE GAME IS OVER
+        //// RETURN TRUE IF THE GAME IS OVER
+        return false;
+    }
+
+    public Player getWinner()
+    {
+        return mWinner;
     }
 }
