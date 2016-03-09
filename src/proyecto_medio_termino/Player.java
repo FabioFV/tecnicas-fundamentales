@@ -15,4 +15,15 @@ public class Player {
         mHanded = handed;
     }
 
+    public String getName(){
+        return mName;
+    }
+
+    public String getLastName(){
+        return mLastName;
+    }
+
+    public String getHanded(){
+        return mHanded;
+    }
 }
