@@ -18,7 +18,7 @@ public class Main {
         int option;
 
         option = in.nextInt();
-        in.close();
+       // in.close();
         
         switch (option) {
 
@@ -46,6 +46,7 @@ public class Main {
         String tieBreakGame;
         boolean tieBreakConfirm;
 
+        String numberOfSets;
         int serverPlayer, numSets;
 
         Scanner inRm = new Scanner(System.in);
@@ -66,7 +67,10 @@ public class Main {
 
         System.out.println("Choose the number of Sets for this game:");
         System.out.println("3 or 5?");
-        numSets = inRm.nextInt();
+        numberOfSets = inRm.nextLine();
+
+        if(numberOfSets == "3") numSets = 3;
+        else numSets = 5;
 
         System.out.println("Will this match allow tie breaks?");
         System.out.println("Yes or No?");
@@ -80,7 +84,7 @@ public class Main {
         System.out.println("2)" + player2Name + " " + player2LastName);
         serverPlayer = inRm.nextInt();
 
-        inRm.close();
+        //inRm.close();
 
         Player Player1 = new Player(player1Name, player1LastName, player1Handed);
         Player Player2 = new Player(player2Name, player2LastName, player2Handed);
@@ -93,7 +97,7 @@ public class Main {
         Match newMatch = new Match(Player1, Player2, choosedServerPlayer, numSets, tieBreakConfirm);
         Player matchWinner = newMatch.getWinner();
 
-        System.out.println("The Match winner is" + matchWinner);
+        System.out.println("The Match winner is " + matchWinner);
     }
 
     private static void findMatch(){
