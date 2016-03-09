@@ -13,7 +13,7 @@ public class Match {
     private Player mFirstPlayer, mSecondPlayer;
     private Player mWinner = null;
 
-    private Queue<Set> mSets = new LinkedList<>();
+    private Stack<Set> mSets = new Stack<>();
     private Map<Player, Integer> mPlayersWins = new HashMap<>();
 
     public Match(Player firstPlayer, Player secondPlayer, Player serverPlayer, Integer numSetsToWin, Boolean tiebreakGame)
@@ -36,6 +36,7 @@ public class Match {
         if(s.addPoint(p))
         {
             Player winner = s.getWinner();
+            System.out.println(winner);
             mPlayersWins.replace(winner, mPlayersWins.get(winner) + 1);
             if(mPlayersWins.get(winner).equals(mNumSetsToWin))
             {
@@ -46,6 +47,10 @@ public class Match {
                 mSets.add(new Set(mFirstPlayer, mSecondPlayer, mServerPlayer, mTiebreakGame));
         }
         return false;
+    }
+
+    public Stack<Set> getSets() {
+        return mSets;
     }
 
     public Player getWinner() {

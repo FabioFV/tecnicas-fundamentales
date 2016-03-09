@@ -3,18 +3,17 @@
  */
 package proyecto_medio_termino;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 public class Set {
 
     private Boolean mTiebreakGame;
     private Player mFirstPlayer, mSecondPlayer, mServerPlayer;
 
-    private Queue<Game> mGames = new LinkedList<>();
+    private Stack<Game> mGames = new Stack<>();
     private Map<Player, Integer> mPlayersWins = new HashMap<>();
+
+    private Player mWinner = null;
 
     public Set(Player firstPlayer, Player secondPlayer, Player serverPlayer, Boolean tiebreakGame)
     {
@@ -37,30 +36,40 @@ public class Set {
             Player winner = g.getWinner();
             Player loser = g.getLoser();
 
-            if(g.isTieBreak == true){
+            if(g.isTieBreak()){
                 mPlayersWins.replace(winner, mPlayersWins.get(winner) + 1);
+                mWinner = winner;
                 return true;
             }
 
             mPlayersWins.replace(winner, mPlayersWins.get(winner) + 1);
-            //// TODO: LOGIC FOR CHECK IF THE SET IS OVER
+
             int gamePointsWinner = mPlayersWins.get(winner);
             int gamePointsLoser = mPlayersWins.get(loser);
 
-            if(gamePointsWinner == 6 && gamePointsLoser == 6){
+
+            if(gamePointsWinner == 6 && gamePointsLoser == 6 && mTiebreakGame){
                 mGames.add(new Game ( mFirstPlayer, mSecondPlayer, mServerPlayer, true));
             }
             else if( gamePointsWinner >= 6 && ( gamePointsWinner - gamePointsLoser ) >= 2 ){
+                mWinner = winner;
                 return true;
             }
-            //// IF IS OVER RETURN TRUE
+            else {
+                mGames.add(new Game(mFirstPlayer, mSecondPlayer, mServerPlayer, false));
+            }
+
         }
         return false;
     }
 
+    public Stack<Game> getGames() {
+        return mGames;
+    }
+
     public Player getWinner()
     {
-        return null;
+        return mWinner;
     }
 
 }
