@@ -26,4 +26,9 @@ public class Player {
     public String getHanded(){
         return mHanded;
     }
+
+    @Override
+    public String toString() {
+        return getName() + " " + getLastName();
+    }
 }

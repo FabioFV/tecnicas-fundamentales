@@ -3,6 +3,9 @@
  */
 package proyecto_medio_termino;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import java.util.*;
 
 public class Game {
@@ -129,5 +132,20 @@ public class Game {
     public Boolean isTieBreak()
     {
         return mTieBreak;
+    }
+
+    public JSONObject getJSONObject()
+    {
+        JSONObject object = new JSONObject();
+        object.put("tiebreak", mTieBreak);
+        object.put("winner", mWinner);
+
+        JSONArray pointsArray = new JSONArray();
+        while(!mPoints.isEmpty())
+            pointsArray.add(mPoints.pop().getJSONObject());
+
+        object.put("point", pointsArray);
+
+        return object;
     }
 }

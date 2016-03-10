@@ -1,5 +1,8 @@
 package proyecto_medio_termino;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import java.util.*;
 
 /**
@@ -76,5 +79,19 @@ public class Match {
 
     public Player getSecondPlayer() {
         return mSecondPlayer;
+    }
+
+    public JSONObject getJSONObject()
+    {
+        JSONObject object = new JSONObject();
+        object.put("winner", mWinner);
+
+        JSONArray setArray = new JSONArray();
+        while(!mSets.isEmpty())
+            setArray.add(mSets.pop().getJSONObject());
+
+        object.put("set", setArray);
+
+        return object;
     }
 }

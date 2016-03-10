@@ -3,6 +3,9 @@
  */
 package proyecto_medio_termino;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import java.util.*;
 
 public class Set {
@@ -70,6 +73,20 @@ public class Set {
     public Player getWinner()
     {
         return mWinner;
+    }
+
+    public JSONObject getJSONObject()
+    {
+        JSONObject object = new JSONObject();
+        object.put("winner", mWinner);
+
+        JSONArray gamesArray = new JSONArray();
+        while(!mGames.isEmpty())
+            gamesArray.add(mGames.pop().getJSONObject());
+
+        object.put("game", gamesArray);
+
+        return object;
     }
 
 }
