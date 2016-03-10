@@ -74,11 +74,11 @@ public class Main {
         System.out.println("3 or 5?");
         numberOfSets = inRm.nextLine();
 
-        if(numberOfSets == "3") numSets = 3;
+        if(numberOfSets == "3") numSets = 2;
 
         //Adding a hidden number of sets for testing purposes so we can do a match of only one set.
         else if(numberOfSets == "1") numSets = 1;
-        else numSets = 5;
+        else numSets = 3;
 
         System.out.println("Will this match allow tie breaks?");
         System.out.println("Yes or No?");
