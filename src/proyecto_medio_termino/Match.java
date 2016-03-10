@@ -38,6 +38,7 @@ public class Match {
             Player winner = s.getWinner();
             System.out.println(winner);
             mPlayersWins.replace(winner, mPlayersWins.get(winner) + 1);
+
             if(mPlayersWins.get(winner).equals(mNumSetsToWin))
             {
                 mWinner = winner;

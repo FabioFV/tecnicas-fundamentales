@@ -47,7 +47,8 @@ public class Main {
         boolean tieBreakConfirm;
 
         String numberOfSets;
-        int serverPlayer, numSets;
+        String serverPlayer;
+        int numSets;
 
         Scanner inRm = new Scanner(System.in);
 
@@ -70,6 +71,7 @@ public class Main {
         numberOfSets = inRm.nextLine();
 
         if(numberOfSets == "3") numSets = 3;
+        else if(numberOfSets == "1") numSets = 1;
         else numSets = 5;
 
         System.out.println("Will this match allow tie breaks?");
@@ -82,7 +84,7 @@ public class Main {
         System.out.println("Choose which player will Serve first?");
         System.out.println("1)" + player1Name + " " + player1LastName);
         System.out.println("2)" + player2Name + " " + player2LastName);
-        serverPlayer = inRm.nextInt();
+        serverPlayer = inRm.nextLine();
 
         //inRm.close();
 
@@ -90,14 +92,87 @@ public class Main {
         Player Player2 = new Player(player2Name, player2LastName, player2Handed);
         Player choosedServerPlayer;
 
-        if(serverPlayer == 1)  choosedServerPlayer = Player1;
+        if(serverPlayer == "1")  choosedServerPlayer = Player1;
         else choosedServerPlayer = Player2;
 
         ////TODO Finish New Match Logic, REMEMBER: TO FIX the Line 94 in the Print of the Winner so it says the name of the winner.
         Match newMatch = new Match(Player1, Player2, choosedServerPlayer, numSets, tieBreakConfirm);
+
+        boolean matchStatus = false;
+
+        while(matchStatus == false){
+
+            Player choosedPlayer = null;
+            System.out.println("Which player scored the point?");
+            System.out.println("1) " + Player1.getName() + " " + Player1.getLastName());
+            System.out.println("2) " + Player2.getName() + " " + Player2.getLastName());
+
+
+            String option;
+            option = inRm.nextLine();
+
+            if (option == "1") choosedPlayer = Player1;
+            else choosedPlayer = Player2;
+
+
+            System.out.println("What type of Shot was is?");
+            System.out.println("1)Serve");
+            System.out.println("2)Forehand");
+            System.out.println("3)Backhand");
+            System.out.println("4)Volley");
+            System.out.println("5)Lob");
+            System.out.println("6)Dropshot");
+            System.out.println("7)Smash");
+            System.out.println("8)Tweener");
+            System.out.println("9)Slice");
+
+            option = inRm.nextLine();
+            Shots newShot;
+            switch(option){
+
+                case "1":
+                    newShot = Shots.SERVE;
+                    break;
+                case "2":
+                    newShot = Shots.FOREHAND;
+                    break;
+                case "3":
+                    newShot = Shots.BACKHAND;
+                    break;
+                case "4":
+                    newShot = Shots.VOLLEY;
+                    break;
+                case "5":
+                    newShot = Shots.LOB;
+                    break;
+                case "6":
+                    newShot = Shots.DROPSHOT;
+                    break;
+                case "7":
+                    newShot = Shots.SMASH;
+                    break;
+                case "8":
+                    newShot = Shots.TWEENER;
+                    break;
+                case "9":
+                    newShot = Shots.SLICE;
+                    break;
+                default:
+                    newShot = Shots.FOREHAND;
+                    break;
+
+            }
+            System.out.println(newShot.toString());
+            ////TODO FINISH IMPLEMENTING & VERIFYING THE NEW POINT SECTION
+            Point newPoint = new Point(choosedPlayer,newShot);
+
+            matchStatus = newMatch.addPoint(newPoint);
+            System.out.println(matchStatus);
+        }
+
         Player matchWinner = newMatch.getWinner();
 
-        System.out.println("The Match winner is " + matchWinner);
+        System.out.println("The Match winner is " + matchWinner.getName() + " " + matchWinner.getLastName() + "!!!!");
     }
 
     private static void findMatch(){
@@ -109,6 +184,13 @@ public class Main {
 
         System.out.println("Goodbye.");
 
+    }
+
+    private Boolean registerPoint(Player scoringPlayer){
+
+
+
+        return false;
     }
 
 }
