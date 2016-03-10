@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String args[]) {
+        //Main menu for the program.
         System.out.println("-----Menu----");
         System.out.println("1) Register Match");
         System.out.println("2) Resimulate old match");
@@ -26,6 +27,7 @@ public class Main {
                 newMatch();
                 break;
             case 2:
+                ////TODO IMPLEMENT THE findMatch method to resimulate an old match
                 break;
             case 3:
                 exit();
@@ -39,6 +41,7 @@ public class Main {
 
     }
 
+    //Method to create a new match based on the data recollected from the input of the user.
     private static void newMatch (){
 
         String player1Name, player1LastName, player1Handed;
@@ -50,6 +53,7 @@ public class Main {
         String serverPlayer;
         int numSets;
 
+        //Creating the Scanner for collecting the input of this method.
         Scanner inRm = new Scanner(System.in);
 
         System.out.println("Insert the name for player 1:");
@@ -71,6 +75,8 @@ public class Main {
         numberOfSets = inRm.nextLine();
 
         if(numberOfSets == "3") numSets = 3;
+
+        //Adding a hidden number of sets for testing purposes so we can do a match of only one set.
         else if(numberOfSets == "1") numSets = 1;
         else numSets = 5;
 
@@ -86,7 +92,6 @@ public class Main {
         System.out.println("2)" + player2Name + " " + player2LastName);
         serverPlayer = inRm.nextLine();
 
-        //inRm.close();
 
         Player Player1 = new Player(player1Name, player1LastName, player1Handed);
         Player Player2 = new Player(player2Name, player2LastName, player2Handed);
@@ -95,7 +100,7 @@ public class Main {
         if(serverPlayer == "1")  choosedServerPlayer = Player1;
         else choosedServerPlayer = Player2;
 
-        ////TODO Finish New Match Logic, REMEMBER: TO FIX the Line 94 in the Print of the Winner so it says the name of the winner.
+        //Creating the new Match with all the data collected from the user.
         Match newMatch = new Match(Player1, Player2, choosedServerPlayer, numSets, tieBreakConfirm);
 
         boolean matchStatus = false;
@@ -163,7 +168,7 @@ public class Main {
 
             }
             System.out.println(newShot.toString());
-            ////TODO FINISH IMPLEMENTING & VERIFYING THE NEW POINT SECTION
+            //Creating the new Point with the chosen player and the type of shot he made to score the point.
             Point newPoint = new Point(choosedPlayer,newShot);
 
             matchStatus = newMatch.addPoint(newPoint);
@@ -171,7 +176,7 @@ public class Main {
         }
 
         Player matchWinner = newMatch.getWinner();
-
+        ////TODO FIX the match is not giving us the winner its giving us actually the loser.
         System.out.println("The Match winner is " + matchWinner.getName() + " " + matchWinner.getLastName() + "!!!!");
     }
 
