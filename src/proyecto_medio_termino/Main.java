@@ -82,9 +82,8 @@ public class Main {
         numberOfSets = inRm.nextLine();
 
         if(numberOfSets.equals("2")) numSets = 2;
-
         //Adding a hidden number of sets for testing purposes so we can do a match of only one set.
-        else if(numberOfSets.equals("1")) numSets = 1;
+        //else if(numberOfSets.equals("1")) numSets = 1;
         else numSets = 3;
 
         System.out.println("Will this match allow tie breaks?");
@@ -174,18 +173,19 @@ public class Main {
                     break;
 
             }
-            System.out.println(newShot.toString());
+            //System.out.println(newShot.toString());
             //Creating the new Point with the chosen player and the type of shot he made to score the point.
             Point newPoint = new Point(choosedPlayer,newShot);
 
             matchStatus = newMatch.addPoint(newPoint);
-            System.out.println(matchStatus);
+            //System.out.println(matchStatus);
         }
 
         //Creating the new Match JSON Object
         JSONObject matchObject = new JSONObject();
             matchObject.put("Match", newMatch.getJSONObject());
-            System.out.println(matchObject.toJSONString());
+        //Line to Test the object creation
+        //System.out.println(matchObject.toJSONString());
         Player matchWinner = newMatch.getWinner();
 
 
@@ -214,7 +214,7 @@ public class Main {
 
         }
 
-                ////TODO FIX the match is not giving us the winner its giving us actually the loser.
+        //Print out the Winner to the user
         System.out.println("The Match winner is " + matchWinner.getName() + " " + matchWinner.getLastName() + "!!!!");
     }
 
@@ -242,7 +242,7 @@ public class Main {
             JSONObject ObjRoot = (JSONObject) parser.parse(jsonIn.toString());
             JSONObject objMatch = (JSONObject) ObjRoot.get("Match");
 
-            System.out.println(ObjRoot.toJSONString());
+            //System.out.println(ObjRoot.toJSONString());
             JSONArray sets = (JSONArray) objMatch.get("set");
 
             //System.out.println(sets.size());
