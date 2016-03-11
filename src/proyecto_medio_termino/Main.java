@@ -189,8 +189,7 @@ public class Main {
         Player matchWinner = newMatch.getWinner();
 
 
-        if(!new File("MatchesRecord.json").exists())
-        {
+
             FileWriter writer = null;
             try {
                 writer = new FileWriter("MatchesRecord.json");
@@ -205,14 +204,7 @@ public class Main {
                     System.out.println(e.toString());
                 }
             }
-        }else{
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader("MatchesRecord.json"));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
 
-        }
 
         //Print out the Winner to the user
         System.out.println("The Match winner is " + matchWinner.getName() + " " + matchWinner.getLastName() + "!!!!");
