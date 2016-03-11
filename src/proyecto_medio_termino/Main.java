@@ -3,6 +3,12 @@
  */
 package proyecto_medio_termino;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.*;
 import java.util.Scanner;
 
 public class Main {
@@ -28,6 +34,7 @@ public class Main {
                 break;
             case 2:
                 ////TODO IMPLEMENT THE findMatch method to resimulate an old match
+                findMatch();
                 break;
             case 3:
                 exit();
@@ -116,7 +123,7 @@ public class Main {
             String option;
             option = inRm.nextLine();
 
-            if (option == "1") choosedPlayer = Player1;
+            if (option.equals("1")) choosedPlayer = Player1;
             else choosedPlayer = Player2;
 
 
@@ -175,13 +182,102 @@ public class Main {
             System.out.println(matchStatus);
         }
 
+        //Creating the new Match JSON Object
+        JSONObject matchObject = new JSONObject();
+            matchObject.put("Match", newMatch.getJSONObject());
+            System.out.println(matchObject.toJSONString());
         Player matchWinner = newMatch.getWinner();
-        ////TODO FIX the match is not giving us the winner its giving us actually the loser.
+
+
+        if(!new File("MatchesRecord.json").exists())
+        {
+            FileWriter writer = null;
+            try {
+                writer = new FileWriter("MatchesRecord.json");
+                writer.append(matchObject.toJSONString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    writer.flush();
+                    writer.close();
+                } catch (IOException e) {
+                    System.out.println(e.toString());
+                }
+            }
+        }else{
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader("MatchesRecord.json"));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+                ////TODO FIX the match is not giving us the winner its giving us actually the loser.
         System.out.println("The Match winner is " + matchWinner.getName() + " " + matchWinner.getLastName() + "!!!!");
     }
 
     private static void findMatch(){
         ////TODO: LOGIC of findMatch
+        File file = new File("MatchesRecord.json");
+        Scanner in = null;
+        try {
+            in = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        StringBuilder jsonIn = new StringBuilder();
+        while(in.hasNextLine()){
+            jsonIn.append(in.nextLine());
+        }
+        //System.out.println(jsonIn.toString());
+
+
+
+        try {
+
+            JSONParser parser = new JSONParser();
+            JSONObject ObjRoot = (JSONObject) parser.parse(jsonIn.toString());
+            JSONObject objMatch = (JSONObject) ObjRoot.get("Match");
+
+            System.out.println(ObjRoot.toJSONString());
+            JSONArray sets = (JSONArray) objMatch.get("set");
+
+            //System.out.println(sets.size());
+
+            for(int i = 0; i < sets.size(); i++){
+
+                JSONObject setsContent = (JSONObject) sets.get(i);
+                System.out.println("[Set " + (i+1) + "]");
+                JSONArray games = (JSONArray) setsContent.get("game");
+
+                for(int j = 0; j < games.size(); j++){
+                    JSONObject gamesContent = (JSONObject) games.get(j);
+                    String winner = (String) gamesContent.get("winner");
+                    boolean tieBreak = (boolean) gamesContent.get("tiebreak");
+                    System.out.println("[Game " + (j+1) + "]");
+                    System.out.println(" Winner:" + winner.toString());
+                    System.out.println(" This Game has Tie Break? " + tieBreak);
+                    JSONArray points = (JSONArray) gamesContent.get("point");
+                    for(int q = 0; q < points.size(); q++){
+                        JSONObject pointContent = (JSONObject) points.get(q);
+                        String scoringPlayer = (String) pointContent.get("player");
+                        String shotMade = (String) pointContent.get("shot");
+                        System.out.println("  [Point " + (q+1) + "]");
+                        System.out.println("  Scoring Player: " + scoringPlayer.toString());
+                        System.out.println("  Shot: " + shotMade.toString());
+                    }
+                }
+            }
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
 
     }
 

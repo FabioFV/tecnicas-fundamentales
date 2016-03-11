@@ -78,7 +78,7 @@ public class Set {
     public JSONObject getJSONObject()
     {
         JSONObject object = new JSONObject();
-        object.put("winner", mWinner);
+        object.put("winner", mWinner.toString());
 
         JSONArray gamesArray = new JSONArray();
         while(!mGames.isEmpty())

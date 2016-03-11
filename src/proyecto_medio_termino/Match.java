@@ -84,7 +84,7 @@ public class Match {
     public JSONObject getJSONObject()
     {
         JSONObject object = new JSONObject();
-        object.put("winner", mWinner);
+        object.put("winner", mWinner.toString());
 
         JSONArray setArray = new JSONArray();
         while(!mSets.isEmpty())

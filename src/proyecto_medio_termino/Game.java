@@ -138,7 +138,7 @@ public class Game {
     {
         JSONObject object = new JSONObject();
         object.put("tiebreak", mTieBreak);
-        object.put("winner", mWinner);
+        object.put("winner", mWinner.toString());
 
         JSONArray pointsArray = new JSONArray();
         while(!mPoints.isEmpty())
