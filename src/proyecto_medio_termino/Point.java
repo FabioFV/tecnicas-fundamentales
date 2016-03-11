@@ -9,6 +9,7 @@ public class Point {
 
     private Player mScoringPlayer;
     private Shots mShot;
+    private String mScore;
 
     public Point(Player scoringPlayer, Shots shot){
         mScoringPlayer = scoringPlayer;
@@ -23,11 +24,16 @@ public class Point {
         return mShot;
     }
 
+    public void setScore(String mScore) {
+        this.mScore = mScore;
+    }
+
     public JSONObject getJSONObject()
     {
         JSONObject object = new JSONObject();
         object.put("player", mScoringPlayer.toString());
         object.put("shot", mShot.toString());
+        object.put("score", mScore);
         return object;
     }
 }

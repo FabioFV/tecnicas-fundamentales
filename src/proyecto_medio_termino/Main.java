@@ -276,10 +276,12 @@ public class Main {
                         JSONObject pointContent = (JSONObject) points.get(q);
                         String scoringPlayer = (String) pointContent.get("player");
                         String shotMade = (String) pointContent.get("shot");
+                        String score = (String) pointContent.get("score");
 
                         System.out.println("  [Point " + (q+1) + "]");
                         System.out.println("   Scoring Player: " + scoringPlayer.toString());
                         System.out.println("   Shot: " + shotMade.toString());
+                        System.out.println("   Score: " + score.toString());
                     }
 
                 }

@@ -37,6 +37,7 @@ public class Game {
         if(mTieBreak)
         {
             mPlayersWins.replace(p.getScoringPlayer(), mPlayersWins.get(p.getScoringPlayer()) + 1);
+            p.setScore(calculateScore(p));
 
             int firstPlayer = mPlayersWins.get(mFirstPlayer);
             int secondPlayer = mPlayersWins.get(mSecondPlayer);
@@ -68,6 +69,7 @@ public class Game {
                 if(mPlayersWins.get(p.getScoringPlayer()) == 4)
                 {
                     mWinner = p.getScoringPlayer();
+                    p.setScore("GAME");
 
                     if(mWinner == mFirstPlayer)
                         mLoser = mSecondPlayer;
@@ -82,10 +84,15 @@ public class Game {
                         if(entry.getValue() == 4)
                             mPlayersWins.replace(entry.getKey(), 3);
                     }
+                    p.setScore(calculateScore(p));
                 }
             }
             else
+            {
                 mPlayersWins.replace(p.getScoringPlayer(), mPlayersWins.get(p.getScoringPlayer()) + 1);
+                p.setScore(calculateScore(p));
+            }
+
 
             int firstPlayer = mPlayersWins.get(mFirstPlayer);
             int secondPlayer = mPlayersWins.get(mSecondPlayer);
@@ -109,6 +116,51 @@ public class Game {
                 }
             }
             return false;
+        }
+    }
+
+    private String calculateScore(Point p)
+    {
+        int serverPoint, secondPoint;
+
+        if(mServerPlayer == mFirstPlayer)
+        {
+            serverPoint = mPlayersWins.get(mFirstPlayer);
+            secondPoint = mPlayersWins.get(mSecondPlayer);
+        }
+        else
+        {
+            serverPoint = mPlayersWins.get(mSecondPlayer);
+            secondPoint = mPlayersWins.get(mFirstPlayer);
+        }
+
+        serverPoint = ordinalToTennisPoint(serverPoint);
+        secondPoint = ordinalToTennisPoint(secondPoint);
+
+        if(serverPoint == 4 && secondPoint == 40)
+            return "ADV - 40";
+        else if(serverPoint == 40 && secondPoint == 4)
+            return "40 - ADV";
+        else if(serverPoint == 4)
+            return "GAME";
+        else if(secondPoint == 4)
+            return "GAME";
+        else
+            return serverPoint + " - " + secondPoint;
+    }
+
+    private int ordinalToTennisPoint(int n)
+    {
+        switch (n)
+        {
+            case 1:
+                return 15;
+            case 2:
+                return 30;
+            case 3:
+                return 40;
+            default:
+                return n;
         }
     }
 
