@@ -225,7 +225,8 @@ public class Main {
         try {
             in = new Scanner(file);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("There are no match records available");
+            return;
         }
         StringBuilder jsonIn = new StringBuilder();
         while(in.hasNextLine()){
