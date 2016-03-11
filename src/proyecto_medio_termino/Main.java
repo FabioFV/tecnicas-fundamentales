@@ -78,20 +78,20 @@ public class Main {
         player2Handed = inRm.nextLine();
 
         System.out.println("Choose the number of Sets for this game:");
-        System.out.println("3 or 5?");
+        System.out.println("2 or 3?");
         numberOfSets = inRm.nextLine();
 
-        if(numberOfSets == "3") numSets = 2;
+        if(numberOfSets.equals("2")) numSets = 2;
 
         //Adding a hidden number of sets for testing purposes so we can do a match of only one set.
-        else if(numberOfSets == "1") numSets = 1;
+        else if(numberOfSets.equals("1")) numSets = 1;
         else numSets = 3;
 
         System.out.println("Will this match allow tie breaks?");
         System.out.println("Yes or No?");
         tieBreakGame = inRm.nextLine();
 
-        if( tieBreakGame == "yes" || tieBreakGame == "Yes") tieBreakConfirm = true;
+        if( tieBreakGame.equals("yes") || tieBreakGame.equals("Yes")) tieBreakConfirm = true;
         else tieBreakConfirm = false;
 
         System.out.println("Choose which player will Serve first?");
@@ -104,7 +104,7 @@ public class Main {
         Player Player2 = new Player(player2Name, player2LastName, player2Handed);
         Player choosedServerPlayer;
 
-        if(serverPlayer == "1")  choosedServerPlayer = Player1;
+        if(serverPlayer.equals("1"))  choosedServerPlayer = Player1;
         else choosedServerPlayer = Player2;
 
         //Creating the new Match with all the data collected from the user.
@@ -249,25 +249,38 @@ public class Main {
             for(int i = 0; i < sets.size(); i++){
 
                 JSONObject setsContent = (JSONObject) sets.get(i);
-                System.out.println("[Set " + (i+1) + "]");
+                System.out.println("-----Set " + (i+1) + "-----");
                 JSONArray games = (JSONArray) setsContent.get("game");
 
                 for(int j = 0; j < games.size(); j++){
+
                     JSONObject gamesContent = (JSONObject) games.get(j);
                     String winner = (String) gamesContent.get("winner");
                     boolean tieBreak = (boolean) gamesContent.get("tiebreak");
+                    String tieBreakString;
+
+                    if(tieBreak){
+                        tieBreakString = "Yes";
+                    }else{
+                        tieBreakString = "No";
+                    }
+
                     System.out.println("[Game " + (j+1) + "]");
-                    System.out.println(" Winner:" + winner.toString());
-                    System.out.println(" This Game has Tie Break? " + tieBreak);
+                    System.out.println(" Winner: " + winner);
+                    System.out.println(" This Game has Tie Break? " + tieBreakString);
                     JSONArray points = (JSONArray) gamesContent.get("point");
+
                     for(int q = 0; q < points.size(); q++){
+
                         JSONObject pointContent = (JSONObject) points.get(q);
                         String scoringPlayer = (String) pointContent.get("player");
                         String shotMade = (String) pointContent.get("shot");
+
                         System.out.println("  [Point " + (q+1) + "]");
-                        System.out.println("  Scoring Player: " + scoringPlayer.toString());
-                        System.out.println("  Shot: " + shotMade.toString());
+                        System.out.println("   Scoring Player: " + scoringPlayer.toString());
+                        System.out.println("   Shot: " + shotMade.toString());
                     }
+
                 }
             }
 
