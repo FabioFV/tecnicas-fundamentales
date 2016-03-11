@@ -286,7 +286,7 @@ public class Main {
 
 
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.out.println("There are no match records available");
         }
 
 
