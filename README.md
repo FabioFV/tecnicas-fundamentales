@@ -6,6 +6,7 @@ In this repository i have all laboratory assignments and project of Fundamental 
 
 - Lab0. A simple program to calculate arithmetic average and standard deviation.
 - Lab1. Console program to save students information and assignments.
+- Lab2. Testing with JUni4.
 
 ### Project
 
