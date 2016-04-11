@@ -17,7 +17,7 @@ The project consists of an application for record all the annotation of a tennis
 The project have two parts:
 
 - [Midterm] - In this part what matter is that the program "works". It's not mandatory to take into account the good practices, design patterns, software development life cycle, etc.
-- [Final] (WORKING) - This part, basically, is for taking into account the good practices, design patterns and software development life cycle.
+- [Final] - (WORKING) This part, basically, is for taking into account the good practices, design patterns and software development life cycle.
 
 ### Colaborators
 
