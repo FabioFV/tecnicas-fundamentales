@@ -10,9 +10,11 @@ public class Player {
     private String mLastName;
     private String mHanded;
 
-    Player()
+    Player(String name, String lastName, String handed)
     {
-
+        mName = name;
+        mLastName = lastName;
+        mHanded = handed;
     }
 
     @Override

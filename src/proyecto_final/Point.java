@@ -12,9 +12,11 @@ public class Point {
     private Shots mShot;
     private String mScore;
 
-    Point()
+    Point(Player player, Shots shot, String score)
     {
-
+        mPlayer = player;
+        mShot = shot;
+        mScore = score;
     }
 
     public JSONObject getJSONObject()

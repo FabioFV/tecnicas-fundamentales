@@ -12,7 +12,7 @@ import java.util.Stack;
 
 public class Match {
 
-    private static Match mInstance;
+    private static Match mInstance = null;
     private static boolean mTiebreakGame;
     private static int mNumSetsToWin;
 
@@ -22,13 +22,19 @@ public class Match {
     private static Stack<Set> mSets = new Stack<>();
     private static Map<Player, Integer> mPlayersWins = new HashMap<>();
 
-    Match()
-    {
-
+    public static Match getInstance() {
+        if(mInstance == null)
+            mInstance = new Match();
+        return mInstance;
     }
 
-    public static Match getInstance() {
-        return mInstance;
+    public static void init(Player firstPlayer, Player secondPlayer, Player serverPlayer, Integer numSetsToWin, Boolean tiebreakGame)
+    {
+        mFirstPlayer = firstPlayer;
+        mSecondPlayer = secondPlayer;
+        mServerPlayer = serverPlayer;
+        mNumSetsToWin = numSetsToWin;
+        mTiebreakGame = tiebreakGame;
     }
 
     public boolean addPoint()
