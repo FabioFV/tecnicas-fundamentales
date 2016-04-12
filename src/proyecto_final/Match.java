@@ -28,7 +28,7 @@ public class Match {
         return mInstance;
     }
 
-    public static void init(Player firstPlayer, Player secondPlayer, Player serverPlayer, Integer numSetsToWin, Boolean tiebreakGame)
+    public void init(Player firstPlayer, Player secondPlayer, Player serverPlayer, Integer numSetsToWin, Boolean tiebreakGame)
     {
         mFirstPlayer = firstPlayer;
         mSecondPlayer = secondPlayer;
@@ -37,14 +37,9 @@ public class Match {
         mTiebreakGame = tiebreakGame;
     }
 
-    public boolean addPoint()
+    public boolean addPoint(Point p)
     {
         return false;
-    }
-
-    public void setServerPlayer(Player player)
-    {
-        mServerPlayer = player;
     }
 
     public static Player getServerPlayer()
@@ -52,7 +47,7 @@ public class Match {
         return mServerPlayer;
     }
 
-    public void changeServerPlayer()
+    public static void changeServerPlayer()
     {
 
     }

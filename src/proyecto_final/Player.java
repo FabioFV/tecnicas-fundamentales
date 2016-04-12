@@ -10,7 +10,7 @@ public class Player {
     private String mLastName;
     private String mHanded;
 
-    Player(String name, String lastName, String handed)
+    public Player(String name, String lastName, String handed)
     {
         mName = name;
         mLastName = lastName;

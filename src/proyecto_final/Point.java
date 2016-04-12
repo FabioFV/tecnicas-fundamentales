@@ -12,7 +12,7 @@ public class Point {
     private Shots mShot;
     private String mScore;
 
-    Point(Player player, Shots shot, String score)
+    public Point(Player player, Shots shot, String score)
     {
         mPlayer = player;
         mShot = shot;

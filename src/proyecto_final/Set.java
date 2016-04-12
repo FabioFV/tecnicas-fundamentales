@@ -16,12 +16,9 @@ public class Set {
     private  Stack<Game> mGames = new Stack<>();
     private Map<Player, Integer> mPlayersWins = new HashMap<>();
 
-    Set()
-    {
+    public Set(){}
 
-    }
-
-    public boolean addPoint()
+    public boolean addPoint(Point p)
     {
         return false;
     }
