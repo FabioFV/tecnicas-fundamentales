@@ -12,10 +12,14 @@ public class Point {
     private Shots mShot;
     private String mScore;
 
-    public Point(Player player, Shots shot, String score)
+    public Point(Player player, Shots shot)
     {
         mPlayer = player;
         mShot = shot;
+    }
+
+    public void setScore(String score)
+    {
         mScore = score;
     }
 

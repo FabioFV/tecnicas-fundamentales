@@ -23,6 +23,18 @@ public class Game {
         return false;
     }
 
+    //TODO: WHEN ALL TEST PASSED CHANGE METHOD TO PRIVATE
+    public String calculateScore(Point p)
+    {
+        return null;
+    }
+
+    //TODO: WHEN ALL TEST PASSED CHANGE METHOD TO PRIVATE
+    public int ordinalToTennisPoint(int n)
+    {
+        return 0;
+    }
+
     public JSONObject getJSONObject()
     {
         return null;
