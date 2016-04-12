@@ -20,9 +20,9 @@ public class SetTest {
         Player p1 = new Player("Player", "1", "Right");
 
         for (int i = 0; i < 23; i++) {
-            set.addPoint(new Point(p1, Shots.BACKHAND, ""));
+            set.addPoint(new Point(p1, Shots.BACKHAND));
         }
-        assertTrue(set.addPoint(new Point(p1, Shots.BACKHAND, "")));
+        assertTrue(set.addPoint(new Point(p1, Shots.BACKHAND)));
     }
 
 }

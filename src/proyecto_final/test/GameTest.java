@@ -1,10 +1,7 @@
 package proyecto_final.test;
 
 import org.junit.Test;
-import proyecto_final.Game;
-import proyecto_final.Player;
-import proyecto_final.Point;
-import proyecto_final.Shots;
+import proyecto_final.*;
 
 import static org.junit.Assert.*;
 
@@ -20,9 +17,36 @@ public class GameTest {
         Player p1 = new Player("Player", "1", "Right");
 
         for (int i = 0; i < 3; i++) {
-            game.addPoint(new Point(p1, Shots.BACKHAND, ""));
+            game.addPoint(new Point(p1, Shots.BACKHAND));
         }
-        assertTrue(game.addPoint(new Point(p1, Shots.BACKHAND, "")));
+        assertTrue(game.addPoint(new Point(p1, Shots.BACKHAND)));
     }
+
+    @Test
+    public void calculateScore() throws Exception {
+        Match match = Match.getInstance();
+        Player p1 = new Player("Player", "1", "Right");
+        Player p2 = new Player("Player", "2", "Left");
+        match.init(p1,p2,p1,2,true);
+
+        Game game = new Game();
+        assertEquals("15 - 0", game.calculateScore(new Point(p1, Shots.BACKHAND)));
+        assertEquals("30 - 0", game.calculateScore(new Point(p1, Shots.BACKHAND)));
+        assertEquals("30 - 15", game.calculateScore(new Point(p2, Shots.BACKHAND)));
+        assertEquals("30 - 30", game.calculateScore(new Point(p2, Shots.BACKHAND)));
+        assertEquals("40 - 30", game.calculateScore(new Point(p1, Shots.BACKHAND)));
+        assertEquals("40 - 40", game.calculateScore(new Point(p2, Shots.BACKHAND)));
+        assertEquals("ADV - 40", game.calculateScore(new Point(p1, Shots.BACKHAND)));
+        assertEquals("GAME", game.calculateScore(new Point(p1, Shots.BACKHAND)));
+    }
+
+    @Test
+    public void ordinalToTennisPoint() throws Exception {
+        Game game = new Game();
+        assertEquals(15, game.ordinalToTennisPoint(1));
+        assertEquals(30, game.ordinalToTennisPoint(2));
+        assertEquals(40, game.ordinalToTennisPoint(3));
+    }
+
 
 }

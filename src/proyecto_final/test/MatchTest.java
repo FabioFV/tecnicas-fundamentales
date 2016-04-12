@@ -28,9 +28,9 @@ public class MatchTest {
     @Test
     public void addPoint() throws Exception {
         for (int i = 0; i < 47; i++) {
-            mMatch.addPoint(new Point(p1, Shots.BACKHAND, ""));
+            mMatch.addPoint(new Point(p1, Shots.BACKHAND));
         }
-        assertTrue(mMatch.addPoint(new Point(p1, Shots.BACKHAND, "")));
+        assertTrue(mMatch.addPoint(new Point(p1, Shots.BACKHAND)));
     }
 
     @Test
