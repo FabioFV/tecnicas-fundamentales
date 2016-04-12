@@ -49,7 +49,11 @@ public class Match {
 
     public static void changeServerPlayer()
     {
-
+        if(mServerPlayer == mFirstPlayer){
+            mServerPlayer = mSecondPlayer;
+        }else{
+            mServerPlayer = mFirstPlayer;
+        }
     }
 
     public JSONObject getJSONObject()
