@@ -28,4 +28,13 @@ public class Set {
         return null;
     }
 
+    public Stack<Game> getGames() {
+        return mGames;
+    }
+
+    public Player getWinner()
+    {
+        return mWinner;
+    }
+
 }
