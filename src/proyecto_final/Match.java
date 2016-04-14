@@ -70,19 +70,19 @@ public class Match {
         return mWinner;
     }
 
-    public Boolean getTiebreakGame() {
+    public static Boolean isTiebreakGame() {
         return mTiebreakGame;
     }
 
-    public Integer getNumSetsToWin() {
+    public static Integer getNumSetsToWin() {
         return mNumSetsToWin;
     }
 
-    public Player getFirstPlayer() {
+    public static Player getFirstPlayer() {
         return mFirstPlayer;
     }
 
-    public Player getSecondPlayer() {
+    public static Player getSecondPlayer() {
         return mSecondPlayer;
     }
 }
