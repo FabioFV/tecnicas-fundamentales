@@ -16,9 +16,30 @@ public class Player {
         mLastName = lastName;
         mHanded = handed;
     }
-
+    public void setName(String name){
+        mName = name;
+    }
+    public void setLastName(String lastName){
+        mLastName = lastName;
+    }
+    public void setHanded(String handed){
+        mHanded = handed;
+    }
+    public String getName()
+    {
+        return mName;
+    }
+    public String getLastName()
+    {
+        return mLastName;
+    }
+    public String getHanded()
+    {
+        return mHanded;
+    }
     @Override
     public String toString() {
         return null;
     }
+    
 }
