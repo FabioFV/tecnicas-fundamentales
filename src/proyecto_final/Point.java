@@ -17,7 +17,24 @@ public class Point {
         mPlayer = player;
         mShot = shot;
     }
+    
+    public Player getPlayer()
+    {
+        return mPlayer;
+    }
 
+    public Shots getShot()
+    {
+        return mShot;
+    }
+    public void setPlayer(Player player)
+    {
+        mPlayer = player;
+    }
+    public void setShot(Shots shot)
+    {
+        mShot = shot;
+    }
     public void setScore(String score)
     {
         mScore = score;
