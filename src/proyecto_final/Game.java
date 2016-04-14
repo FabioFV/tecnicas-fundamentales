@@ -102,7 +102,6 @@ public class Game {
         }
     }
 
-    //TODO: WHEN ALL TEST PASSED CHANGE METHOD TO PRIVATE
     public String calculateScore()
     {
         int serverPoint, secondPoint;
@@ -118,20 +117,24 @@ public class Game {
             secondPoint = mPlayersWins.get(Match.getFirstPlayer());
         }
 
-        serverPoint = ordinalToTennisPoint(serverPoint);
-        secondPoint = ordinalToTennisPoint(secondPoint);
+        if(!mTiebreakGame)
+        {
+            serverPoint = ordinalToTennisPoint(serverPoint);
+            secondPoint = ordinalToTennisPoint(secondPoint);
 
-        if(serverPoint == 4 && secondPoint == 40)
-            return "ADV - 40";
-        else if(serverPoint == 40 && secondPoint == 4)
-            return "40 - ADV";
-        else if(serverPoint == 4 || secondPoint == 4)
-            return "GAME";
+            if(serverPoint == 4 && secondPoint == 40)
+                return "ADV - 40";
+            else if(serverPoint == 40 && secondPoint == 4)
+                return "40 - ADV";
+            else if(serverPoint == 4 || secondPoint == 4)
+                return "GAME";
+            else
+                return serverPoint + " - " + secondPoint;
+        }
         else
             return serverPoint + " - " + secondPoint;
     }
 
-    //TODO: WHEN ALL TEST PASSED CHANGE METHOD TO PRIVATE
     public int ordinalToTennisPoint(int n)
     {
         switch (n)

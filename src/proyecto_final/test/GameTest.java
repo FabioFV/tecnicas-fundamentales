@@ -73,6 +73,46 @@ public class GameTest {
     }
 
     @Test
+    public void calculateScoreWithTiebreak() throws Exception {
+        Match match = Match.getInstance();
+        Player p1 = new Player("Player", "1", "Right");
+        Player p2 = new Player("Player", "2", "Left");
+        match.init(p1,p2,p1,2,true);
+
+        Game game = new Game(true);
+
+        game.addPoint(new Point(p1, Shots.BACKHAND));
+        assertEquals("1 - 0", game.calculateScore());
+
+        game.addPoint(new Point(p1, Shots.BACKHAND));
+        assertEquals("2 - 0", game.calculateScore());
+
+        game.addPoint(new Point(p2, Shots.BACKHAND));
+        assertEquals("2 - 1", game.calculateScore());
+
+        game.addPoint(new Point(p2, Shots.BACKHAND));
+        assertEquals("2 - 2", game.calculateScore());
+
+        game.addPoint(new Point(p1, Shots.BACKHAND));
+        assertEquals("3 - 2", game.calculateScore());
+
+        game.addPoint(new Point(p2, Shots.BACKHAND));
+        assertEquals("3 - 3", game.calculateScore());
+
+        game.addPoint(new Point(p1, Shots.BACKHAND));
+        assertEquals("4 - 3", game.calculateScore());
+
+        game.addPoint(new Point(p1, Shots.BACKHAND));
+        assertEquals("5 - 3", game.calculateScore());
+
+        game.addPoint(new Point(p1, Shots.BACKHAND));
+        assertEquals("6 - 3", game.calculateScore());
+
+        game.addPoint(new Point(p1, Shots.BACKHAND));
+        assertEquals("7 - 3", game.calculateScore());
+    }
+
+    @Test
     public void ordinalToTennisPoint() throws Exception {
         Game game = new Game(false);
         assertEquals(15, game.ordinalToTennisPoint(1));
