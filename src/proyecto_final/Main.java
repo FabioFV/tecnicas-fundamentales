@@ -232,7 +232,8 @@ public class Main {
                 option = in.nextLine();
                 if (option.equals("1")) choosedPlayer = player1;
                 else choosedPlayer = player2;
-
+                lastScored.setPlayer(choosedPlayer);
+                
                 System.out.println("What type of Shot was is?");
                 System.out.println("1)Serve");
                 System.out.println("2)Forehand");
@@ -280,10 +281,13 @@ public class Main {
                         break;
                 }
 
-                lastScored = new Point(choosedPlayer, nShot);
+                lastScored.setShot(nShot);
             }
             if(lastScored != null)
             matchStatus = newMatch.addPoint(lastScored);
+            //print it to make the user sure the change was done
+            System.out.println(lastScored.getPlayer().getName() +" "+ lastScored.getPlayer().getLastName());
+            System.out.println(lastScored.getShot().toString());
         }
 
         JSONObject matchObject = new JSONObject();
