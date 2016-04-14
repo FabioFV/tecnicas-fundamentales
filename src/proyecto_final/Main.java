@@ -5,9 +5,8 @@ package proyecto_final;
  */
 
 import jdk.nashorn.internal.parser.JSONParser;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,9 +15,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-/**
- * Created by Loammi on 13/4/2016.
- */
 public class Main {
 
     public static void main(String args[])
@@ -291,11 +287,8 @@ public class Main {
         }
 
         JSONObject matchObject = new JSONObject();
-        try {
             matchObject.put("Match", newMatch.getJSONObject());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
         FileWriter writer = null;
         try {
             writer = new FileWriter("MatchesRecord.json");
