@@ -39,6 +39,20 @@ public class Match {
 
     public boolean addPoint(Point p)
     {
+        if(Set.addPoint(p))
+        {
+            Player winner = Set.getWinner();
+            System.out.println(winner);
+            mPlayersWins.replace(winner, mPlayersWins.get(winner) + 1);
+
+            if(mPlayersWins.get(winner).equals(mNumSetsToWin))
+            {
+                mWinner = winner;
+                return true;
+            }
+            else
+                mSets.add(new Set());
+        }
         return false;
     }
 

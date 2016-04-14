@@ -12,13 +12,13 @@ import java.util.Stack;
 
 public class Set {
 
-    private Player mWinner;
+    private static Player mWinner;
     private  Stack<Game> mGames = new Stack<>();
     private Map<Player, Integer> mPlayersWins = new HashMap<>();
 
     public Set(){}
 
-    public boolean addPoint(Point p)
+    public static boolean addPoint(Point p)
     {
         return false;
     }
@@ -32,7 +32,7 @@ public class Set {
         return mGames;
     }
 
-    public Player getWinner()
+    public static Player getWinner()
     {
         return mWinner;
     }
