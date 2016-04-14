@@ -60,4 +60,29 @@ public class Match {
     {
         return null;
     }
+
+
+    public Stack<Set> getSets() {
+        return mSets;
+    }
+
+    public Player getWinner() {
+        return mWinner;
+    }
+
+    public Boolean getTiebreakGame() {
+        return mTiebreakGame;
+    }
+
+    public Integer getNumSetsToWin() {
+        return mNumSetsToWin;
+    }
+
+    public Player getFirstPlayer() {
+        return mFirstPlayer;
+    }
+
+    public Player getSecondPlayer() {
+        return mSecondPlayer;
+    }
 }
