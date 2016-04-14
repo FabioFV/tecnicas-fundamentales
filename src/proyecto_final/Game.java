@@ -1,5 +1,6 @@
 package proyecto_final;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.HashMap;
@@ -152,7 +153,17 @@ public class Game {
 
     public JSONObject getJSONObject()
     {
-        return null;
+        JSONObject object = new JSONObject();
+        object.put("tiebreak", mTiebreakGame);
+        object.put("winner", mWinner.toString());
+
+        JSONArray pointsArray = new JSONArray();
+        while(!mPoints.isEmpty())
+            pointsArray.add(mPoints.pop().getJSONObject());
+
+        object.put("point", pointsArray);
+
+        return object;
     }
 
 }
