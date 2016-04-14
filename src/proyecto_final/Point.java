@@ -28,4 +28,7 @@ public class Point {
         return null;
     }
 
+    public Player getPlayer() {
+        return mPlayer;
+    }
 }
