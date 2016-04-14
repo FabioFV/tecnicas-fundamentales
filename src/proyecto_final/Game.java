@@ -15,24 +15,136 @@ public class Game {
     private Player mWinner;
     private Stack<Point> mPoints = new Stack<>();
     private Map<Player, Integer> mPlayersWins = new HashMap<>();
+    private boolean mTiebreakGame;
 
-    public Game(){}
+    public Game(boolean tiebreakGame){
+        mPlayersWins.put(Match.getFirstPlayer(), 0);
+        mPlayersWins.put(Match.getSecondPlayer(), 0);
+        mTiebreakGame = tiebreakGame;
+    }
 
     public boolean addPoint(Point p)
     {
-        return false;
+        mPoints.add(p);
+
+        if(mTiebreakGame)
+        {
+            mPlayersWins.replace(p.getPlayer(), mPlayersWins.get(p.getPlayer()) + 1);
+            p.setScore(calculateScore());
+
+            int firstPlayer = mPlayersWins.get(Match.getFirstPlayer());
+            int secondPlayer = mPlayersWins.get(Match.getSecondPlayer());
+
+            if(firstPlayer >= secondPlayer)
+            {
+                if(firstPlayer >= 7 && (firstPlayer - secondPlayer) > 2)
+                {
+                    mWinner = Match.getFirstPlayer();
+                    return true;
+                }
+            }
+            else
+            {
+                if(secondPlayer >= 7 && (secondPlayer - firstPlayer) > 2)
+                {
+                    mWinner = Match.getSecondPlayer();
+                    return true;
+                }
+            }
+            return false;
+        }
+        else
+        {
+            if(mPlayersWins.containsValue(4))
+            {
+                if(mPlayersWins.get(p.getPlayer()) == 4)
+                {
+                    mWinner = p.getPlayer();
+                    p.setScore("GAME");
+                    return true;
+                }
+                else
+                {
+                    for (Map.Entry<Player, Integer> entry : mPlayersWins.entrySet()) {
+                        if(entry.getValue() == 4)
+                            mPlayersWins.replace(entry.getKey(), 3);
+                    }
+                    p.setScore(calculateScore());
+                }
+            }
+            else
+            {
+                mPlayersWins.replace(p.getPlayer(), mPlayersWins.get(p.getPlayer()) + 1);
+                p.setScore(calculateScore());
+            }
+
+
+            int firstPlayer = mPlayersWins.get(Match.getFirstPlayer());
+            int secondPlayer = mPlayersWins.get(Match.getSecondPlayer());
+
+            if(firstPlayer >= secondPlayer)
+            {
+                if(firstPlayer >= 4 && (firstPlayer - secondPlayer) > 2)
+                {
+                    mWinner = Match.getFirstPlayer();
+                    return true;
+                }
+            }
+            else
+            {
+                if(secondPlayer >= 4 && (secondPlayer - firstPlayer) > 2)
+                {
+                    mWinner = Match.getSecondPlayer();
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     //TODO: WHEN ALL TEST PASSED CHANGE METHOD TO PRIVATE
-    public String calculateScore(Point p)
+    public String calculateScore()
     {
-        return null;
+        int serverPoint, secondPoint;
+
+        if(Match.getServerPlayer() == Match.getFirstPlayer())
+        {
+            serverPoint = mPlayersWins.get(Match.getFirstPlayer());
+            secondPoint = mPlayersWins.get(Match.getSecondPlayer());
+        }
+        else
+        {
+            serverPoint = mPlayersWins.get(Match.getSecondPlayer());
+            secondPoint = mPlayersWins.get(Match.getFirstPlayer());
+        }
+
+        serverPoint = ordinalToTennisPoint(serverPoint);
+        secondPoint = ordinalToTennisPoint(secondPoint);
+
+        if(serverPoint == 4 && secondPoint == 40)
+            return "ADV - 40";
+        else if(serverPoint == 40 && secondPoint == 4)
+            return "40 - ADV";
+        else if(serverPoint == 4 || secondPoint == 4)
+            return "GAME";
+        else
+            return serverPoint + " - " + secondPoint;
     }
 
     //TODO: WHEN ALL TEST PASSED CHANGE METHOD TO PRIVATE
     public int ordinalToTennisPoint(int n)
     {
-        return 0;
+        switch (n)
+        {
+            case 1:
+                return 15;
+            case 2:
+                return 30;
+            case 3:
+                return 40;
+            default:
+                return n;
+        }
     }
 
     public JSONObject getJSONObject()

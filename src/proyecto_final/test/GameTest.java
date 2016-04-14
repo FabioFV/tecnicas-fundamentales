@@ -13,13 +13,32 @@ public class GameTest {
 
     @Test
     public void addPoint() throws Exception {
-        Game game = new Game();
+        Match match = Match.getInstance();
         Player p1 = new Player("Player", "1", "Right");
+        Player p2 = new Player("Player", "2", "Left");
+        match.init(p1,p2,p1,2,true);
+
+        Game game = new Game(false);
 
         for (int i = 0; i < 3; i++) {
             game.addPoint(new Point(p1, Shots.BACKHAND));
         }
-        assertTrue(game.addPoint(new Point(p1, Shots.BACKHAND)));
+        assertEquals(true, game.addPoint(new Point(p1, Shots.BACKHAND)));
+    }
+
+    @Test
+    public void addPointWithTiebreak() throws Exception {
+        Match match = Match.getInstance();
+        Player p1 = new Player("Player", "1", "Right");
+        Player p2 = new Player("Player", "2", "Left");
+        match.init(p1,p2,p1,2,true);
+
+        Game game = new Game(true);
+
+        for (int i = 0; i < 6; i++) {
+            game.addPoint(new Point(p1, Shots.BACKHAND));
+        }
+        assertEquals(true, game.addPoint(new Point(p1, Shots.BACKHAND)));
     }
 
     @Test
@@ -29,20 +48,33 @@ public class GameTest {
         Player p2 = new Player("Player", "2", "Left");
         match.init(p1,p2,p1,2,true);
 
-        Game game = new Game();
-        assertEquals("15 - 0", game.calculateScore(new Point(p1, Shots.BACKHAND)));
-        assertEquals("30 - 0", game.calculateScore(new Point(p1, Shots.BACKHAND)));
-        assertEquals("30 - 15", game.calculateScore(new Point(p2, Shots.BACKHAND)));
-        assertEquals("30 - 30", game.calculateScore(new Point(p2, Shots.BACKHAND)));
-        assertEquals("40 - 30", game.calculateScore(new Point(p1, Shots.BACKHAND)));
-        assertEquals("40 - 40", game.calculateScore(new Point(p2, Shots.BACKHAND)));
-        assertEquals("ADV - 40", game.calculateScore(new Point(p1, Shots.BACKHAND)));
-        assertEquals("GAME", game.calculateScore(new Point(p1, Shots.BACKHAND)));
+        Game game = new Game(false);
+
+        game.addPoint(new Point(p1, Shots.BACKHAND));
+        assertEquals("15 - 0", game.calculateScore());
+
+        game.addPoint(new Point(p1, Shots.BACKHAND));
+        assertEquals("30 - 0", game.calculateScore());
+
+        game.addPoint(new Point(p2, Shots.BACKHAND));
+        assertEquals("30 - 15", game.calculateScore());
+
+        game.addPoint(new Point(p2, Shots.BACKHAND));
+        assertEquals("30 - 30", game.calculateScore());
+
+        game.addPoint(new Point(p1, Shots.BACKHAND));
+        assertEquals("40 - 30", game.calculateScore());
+
+        game.addPoint(new Point(p2, Shots.BACKHAND));
+        assertEquals("40 - 40", game.calculateScore());
+
+        game.addPoint(new Point(p1, Shots.BACKHAND));
+        assertEquals("ADV - 40", game.calculateScore());
     }
 
     @Test
     public void ordinalToTennisPoint() throws Exception {
-        Game game = new Game();
+        Game game = new Game(false);
         assertEquals(15, game.ordinalToTennisPoint(1));
         assertEquals(30, game.ordinalToTennisPoint(2));
         assertEquals(40, game.ordinalToTennisPoint(3));
