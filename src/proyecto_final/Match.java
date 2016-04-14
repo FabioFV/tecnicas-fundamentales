@@ -85,4 +85,5 @@ public class Match {
     public static Player getSecondPlayer() {
         return mSecondPlayer;
     }
+    
 }
