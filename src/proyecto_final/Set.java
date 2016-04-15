@@ -17,7 +17,7 @@ public class Set {
     private Map<Player, Integer> mPlayersWins = new HashMap<>();
 
     public Set(){
-        mGames.add(new Game(Match.isTiebreakGame()));
+        mGames.add(new Game(false));
         mPlayersWins.put(Match.getFirstPlayer(), 0);
         mPlayersWins.put(Match.getSecondPlayer(), 0);
     }
