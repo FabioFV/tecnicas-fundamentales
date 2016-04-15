@@ -42,6 +42,10 @@ public class Point {
 
     public JSONObject getJSONObject()
     {
-        return null;
+        JSONObject object = new JSONObject();
+        object.put("player", mPlayer.toString());
+        object.put("shot", mShot.toString());
+        object.put("score", mScore);
+        return object;
     }
 }
