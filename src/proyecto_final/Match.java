@@ -1,5 +1,6 @@
 package proyecto_final;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.HashMap;
@@ -77,7 +78,16 @@ public class Match {
 
     public JSONObject getJSONObject()
     {
-        return null;
+        JSONObject object = new JSONObject();
+        object.put("winner", mWinner.toString());
+
+        JSONArray setArray = new JSONArray();
+        while(!mSets.isEmpty())
+            setArray.add(mSets.pop().getJSONObject());
+
+        object.put("set", setArray);
+
+        return object;
     }
 
 

@@ -1,5 +1,6 @@
 package proyecto_final;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.HashMap;
@@ -66,7 +67,16 @@ public class Set {
 
     public JSONObject getJSONObject()
     {
-        return null;
+        JSONObject object = new JSONObject();
+        object.put("winner", mWinner.toString());
+
+        JSONArray gamesArray = new JSONArray();
+        while(!mGames.isEmpty())
+            gamesArray.add(mGames.pop().getJSONObject());
+
+        object.put("game", gamesArray);
+
+        return object;
     }
 
     public Stack<Game> getGames() {
