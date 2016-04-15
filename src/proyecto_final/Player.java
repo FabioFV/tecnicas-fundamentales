@@ -39,7 +39,7 @@ public class Player {
     }
     @Override
     public String toString() {
-        return null;
+        return mName + " " + mLastName;
     }
     
 }
