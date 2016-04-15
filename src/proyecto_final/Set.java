@@ -12,14 +12,55 @@ import java.util.Stack;
 
 public class Set {
 
-    private static Player mWinner;
-    private  Stack<Game> mGames = new Stack<>();
+    private Player mWinner;
+    private Stack<Game> mGames = new Stack<>();
     private Map<Player, Integer> mPlayersWins = new HashMap<>();
 
-    public Set(){}
+    public Set(){
+        mGames.add(new Game(Match.isTiebreakGame()));
+        mPlayersWins.put(Match.getFirstPlayer(), 0);
+        mPlayersWins.put(Match.getSecondPlayer(), 0);
+    }
 
-    public static boolean addPoint(Point p)
+    public boolean addPoint(Point p)
     {
+        Game g = mGames.peek();
+        if(g.addPoint(p))
+        {
+            Player winner = g.getWinner();
+            Player loser;
+
+            if(Match.getFirstPlayer().equals(g.getWinner()))
+                loser = Match.getSecondPlayer();
+            else
+                loser = Match.getFirstPlayer();
+
+            if(g.isTiebreakGame()){
+                mPlayersWins.replace(winner, mPlayersWins.get(winner) + 1);
+                mWinner = winner;
+                return true;
+            }
+
+            mPlayersWins.replace(winner, mPlayersWins.get(winner) + 1);
+
+            int gamePointsWinner = mPlayersWins.get(winner);
+            int gamePointsLoser = mPlayersWins.get(loser);
+
+
+            if(gamePointsWinner == 6 && gamePointsLoser == 6 && Match.isTiebreakGame()){
+                Match.changeServerPlayer();
+                mGames.add(new Game(true));
+            }
+            else if( gamePointsWinner >= 6 && ( gamePointsWinner - gamePointsLoser ) >= 2 ){
+                mWinner = winner;
+                return true;
+            }
+            else {
+                Match.changeServerPlayer();
+                mGames.add(new Game(false));
+            }
+
+        }
         return false;
     }
 
@@ -32,7 +73,7 @@ public class Set {
         return mGames;
     }
 
-    public static Player getWinner()
+    public Player getWinner()
     {
         return mWinner;
     }

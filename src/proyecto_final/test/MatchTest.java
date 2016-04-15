@@ -15,22 +15,30 @@ import static org.junit.Assert.*;
 
 public class MatchTest {
 
-    private Match mMatch;
-    private Player p1 = new Player("Player", "1", "Right");
-    private Player p2 = new Player("Player", "2", "Left");
+    @Test
+    public void addPoint() throws Exception {
+        Match match = Match.getInstance();
+        Player p1 = new Player("Player", "1", "Right");
+        Player p2 = new Player("Player", "2", "Left");
+        match.init(p1,p2,p1,2,false);
 
-    @Before
-    public void setUp() throws Exception {
-        mMatch = Match.getInstance();
-        mMatch.init(p1,p2,p1,2,true);
+        for (int i = 0; i < 47; i++) {
+            match.addPoint(new Point(p1, Shots.BACKHAND));
+        }
+        assertEquals(true, match.addPoint(new Point(p1, Shots.BACKHAND)));
     }
 
     @Test
-    public void addPoint() throws Exception {
+    public void addPointWithTiebreak() throws Exception {
+        Match match = Match.getInstance();
+        Player p1 = new Player("Player", "1", "Right");
+        Player p2 = new Player("Player", "2", "Left");
+        match.init(p1,p2,p1,2,true);
+
         for (int i = 0; i < 47; i++) {
-            mMatch.addPoint(new Point(p1, Shots.BACKHAND));
+            match.addPoint(new Point(p1, Shots.BACKHAND));
         }
-        assertTrue(mMatch.addPoint(new Point(p1, Shots.BACKHAND)));
+        assertEquals(true, match.addPoint(new Point(p1, Shots.BACKHAND)));
     }
 
     @Test

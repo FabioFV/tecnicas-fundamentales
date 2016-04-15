@@ -166,4 +166,11 @@ public class Game {
         return object;
     }
 
+    public Player getWinner() {
+        return mWinner;
+    }
+
+    public boolean isTiebreakGame() {
+        return mTiebreakGame;
+    }
 }

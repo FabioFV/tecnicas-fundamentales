@@ -35,14 +35,19 @@ public class Match {
         mServerPlayer = serverPlayer;
         mNumSetsToWin = numSetsToWin;
         mTiebreakGame = tiebreakGame;
+
+        mSets.add(new Set());
+        mPlayersWins.put(mFirstPlayer, 0);
+        mPlayersWins.put(mSecondPlayer, 0);
     }
 
     public boolean addPoint(Point p)
     {
-        if(Set.addPoint(p))
+        Set s = mSets.peek();
+
+        if(s.addPoint(p))
         {
-            Player winner = Set.getWinner();
-            System.out.println(winner);
+            Player winner = s.getWinner();
             mPlayersWins.replace(winner, mPlayersWins.get(winner) + 1);
 
             if(mPlayersWins.get(winner).equals(mNumSetsToWin))
